@@ -14,7 +14,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                ls
+                sh 'ls'
             }
         }
         stage('Terraform Init') {
