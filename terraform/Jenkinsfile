@@ -3,24 +3,23 @@ pipeline {
         timestamps()
         skipDefaultCheckout()
     }
-    agent {label 'ansible'}
+    agent { label 'ansible' }
     parameters {
         choice(name: 'Action', choices: 'plan\napply', description: 'Manual build stages')
     }
     triggers {
         pollSCM('H/10 * * * *')
     }
-    stage('Checkout') {
+    stages {
+        stage('Checkout') {
             steps {
                 checkout scm
             }
-    }
-    stages {
+        }
         stage('Terraform Init') {
             steps {
                 ansiColor('xterm') {
                     sh 'cd ansible; terraform1.2.4 init'
-                    }
                 }
             }
         }
@@ -33,10 +32,8 @@ pipeline {
         }
         stage('Terraform Apply') {
             when {
-                allOf {
-                    expression {
-                        params.Action == 'apply'
-                    }
+                expression {
+                    params.Action == 'apply'
                 }
             }
             steps {
@@ -47,24 +44,21 @@ pipeline {
         }
         stage('Run ansible playbook') {
             when {
-                allOf {
-                    expression {
-                        params.Action == 'apply'
-                    }
+                expression {
+                    params.Action == 'apply'
                 }
             }
             steps {
                 ansiColor('xterm') {
                     sh 'ansible-playbook -i inventory.yml test.yml'
-                    }
                 }
             }
-        post {
-            always {
-                echo " Clean up the workspace in deploy node!"
-                cleanWs()
-            }
         }
-    }   
-
-
+    }
+    post {
+        always {
+            echo "Clean up the workspace in deploy node!"
+            cleanWs()
+        }
+    }
+}
