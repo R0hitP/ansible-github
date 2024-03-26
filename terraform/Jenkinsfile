@@ -19,14 +19,14 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 ansiColor('xterm') {
-                    sh 'cd ansible; terraform1.2.4 init'
+                    sh 'cd terraform; terraform1.2.4 init'
                 }
             }
         }
         stage('Terraform Plan') {
             steps {
                 ansiColor('xterm') {
-                    sh 'cd ansible; terraform1.2.4 plan'
+                    sh 'cd terraform; terraform1.2.4 plan'
                 }
             }
         }
