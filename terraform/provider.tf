@@ -4,10 +4,10 @@ terraform {
       version = "~> 1.2.0"
       source  = "ansible/ansible"
     }
-    aws = {
-      version = "~> 5.0"
-      source  = "hashicorp/aws"
-      region = "us-east-1"
-    }
   }
+}
+
+provider "aws" {
+  version = "~> 5.0"
+  region  = "us-east-1"
 }
