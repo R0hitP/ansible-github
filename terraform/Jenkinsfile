@@ -7,14 +7,13 @@ pipeline {
     parameters {
         choice(name: 'Action', choices: 'plan\napply', description: 'Manual build stages')
     }
-    triggers {
-        pollSCM('H/10 * * * *')
-    }
+    // triggers {
+    //     pollSCM('H/10 * * * *')
+    // }
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
-                sh 'ls'
             }
         }
         stage('Terraform Init') {
