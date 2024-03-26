@@ -5,7 +5,8 @@ data "aws_instances" "ansible" {
 }
 
 resource "ansible_host" "host" {
-  name   = data.aws_instances.ansible.private_ips[0]  # Replace with the actual hostname or IP address of your host
+  for_each = data.aws_instances.ansible.private_ips
+  name   = each.key  # Replace with the actual hostname or IP address of your host
   groups = ["test"]  # Replace with the name of the group(s) this host belongs to in your Ansible inventory
 
   variables = {
