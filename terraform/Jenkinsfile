@@ -27,7 +27,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 ansiColor('xterm') {
-                    sh 'cd terraform; terraform1.2.4 plan'
+                    sh 'cd terraform; terraform plan'
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
             }
             steps {
                 ansiColor('xterm') {
-                    sh 'terraform1.2.4 apply -auto-approve'
+                    sh 'terraform apply -auto-approve'
                 }
             }
         }
