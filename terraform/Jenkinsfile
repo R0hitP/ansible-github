@@ -1,0 +1,70 @@
+pipeline {
+    options {
+        timestamps()
+        skipDefaultCheckout()
+    }
+    agent {label 'ansible'}
+    parameters {
+        choice(name: 'Action', choices: 'plan\napply', description: 'Manual build stages')
+    }
+    triggers {
+        pollSCM('H/10 * * * *')
+    }
+    stage('Checkout') {
+            steps {
+                checkout scm
+            }
+    }
+    stages {
+        stage('Terraform Init') {
+            steps {
+                ansiColor('xterm') {
+                    sh 'cd ansible; terraform1.2.4 init'
+                    }
+                }
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                ansiColor('xterm') {
+                    sh 'cd ansible; terraform1.2.4 plan'
+                }
+            }
+        }
+        stage('Terraform Apply') {
+            when {
+                allOf {
+                    expression {
+                        params.Action == 'apply'
+                    }
+                }
+            }
+            steps {
+                ansiColor('xterm') {
+                    sh 'terraform1.2.4 apply -auto-approve'
+                }
+            }
+        }
+        stage('Run ansible playbook') {
+            when {
+                allOf {
+                    expression {
+                        params.Action == 'apply'
+                    }
+                }
+            }
+            steps {
+                ansiColor('xterm') {
+                    sh 'ansible-playbook -i inventory.yml test.yml'
+                    }
+                }
+            }
+        post {
+            always {
+                echo " Clean up the workspace in deploy node!"
+                cleanWs()
+            }
+        }
+    }   
+
+
