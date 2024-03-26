@@ -1,0 +1,38 @@
+pipeline {
+    options {
+        timestamps()
+        skipDefaultCheckout()
+    }
+    agent { label 'ansible' }
+    parameters {
+        choice(name: 'Action', choices: 'plan\napply', description: 'Manual build stages')
+    }
+    // triggers {
+    //     pollSCM('H/10 * * * *')
+    // }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Run ansible playbook') {
+            when {
+                expression {
+                    params.Action == 'apply'
+                }
+            }
+            steps {
+                ansiColor('xterm') {
+                    sh 'cd dynamic-inventory; ansible-playbook -i aws_ec2.yml test.yml'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo "Clean up the workspace in deploy node!"
+            cleanWs()
+        }
+    }
+}
