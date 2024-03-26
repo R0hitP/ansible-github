@@ -39,7 +39,7 @@ pipeline {
             }
             steps {
                 ansiColor('xterm') {
-                    sh 'terraform apply -auto-approve'
+                    sh 'cd terraform; terraform apply -auto-approve'
                 }
             }
         }
@@ -51,7 +51,7 @@ pipeline {
             }
             steps {
                 ansiColor('xterm') {
-                    sh 'ansible-playbook -i inventory.yml test.yml'
+                    sh 'cd terraform; ansible-playbook -i inventory.yml test.yml'
                 }
             }
         }
