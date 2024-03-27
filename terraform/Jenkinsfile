@@ -49,17 +49,14 @@ pipeline {
                 }
             }
             steps {
-                // ansiColor('xterm') {
-                //     sh 'cd terraform; ansible-playbook -i inventory.yml test.yml'
-                // }
-                ansiColor('xterm') {
-                    sh 'cd terraform'
-                    sh 'ls'
-                    ansiblePlaybook(
-                        playbook: 'test.yml',
-                        inventory: 'inventory.yml',
-                        //credentialsId: 'sample-ssh-key',
-                        colorized: true)
+                dir('terraform') { // Change directory to 'terraform'
+                    ansiColor('xterm') {
+                        ansiblePlaybook(
+                            playbook: 'test.yml',
+                            inventory: 'inventory.yml',
+                            //credentialsId: 'sample-ssh-key',
+                            colorized: true)
+                    }
                 }
             }
         }
