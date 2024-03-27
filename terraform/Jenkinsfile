@@ -54,6 +54,7 @@ pipeline {
                 // }
                 ansiColor('xterm') {
                     sh 'cd terraform'
+                    sh 'ls'
                     ansiblePlaybook(
                         playbook: 'test.yml',
                         inventory: 'inventory.yml',
