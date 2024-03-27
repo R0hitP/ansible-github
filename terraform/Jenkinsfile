@@ -52,11 +52,11 @@ pipeline {
                 // ansiColor('xterm') {
                 //     sh 'cd terraform; ansible-playbook -i inventory.yml test.yml'
                 // }
+                sh 'cd terraform'
                 ansiColor('xterm') {
-                    sh 'ls'
                     ansiblePlaybook(
-                        playbook: 'terraform/test.yml',
-                        inventory: 'terraform/inventory.yml',
+                        playbook: 'test.yml',
+                        inventory: 'inventory.yml',
                         //credentialsId: 'sample-ssh-key',
                         colorized: true)
                 }
