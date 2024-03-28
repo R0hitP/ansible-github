@@ -5,7 +5,7 @@ aws_profile: default
 regions:
   - us-east-1
 
-    #hostnames:
+  #hostnames:
     # - ip-address
 
 # keyed_groups:
