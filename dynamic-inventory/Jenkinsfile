@@ -6,7 +6,7 @@ pipeline {
     agent { label 'ansible' }
     parameters {
         choice(name: 'Action', choices: 'plan\napply', description: 'Manual build stages')
-        string(name: 'hosts', defaultValue: 'aws_ec2.yml', description: 'Here we are providing host value')
+        string(name: 'hosts', defaultValue: 'hosts/aws_ec2.yml', description: 'Here we are providing host value')
         string(name: 'source_host', defaultValue: 'source_host=ubuntu', description: 'Here we are providing source_host value')
     }
     // triggers {

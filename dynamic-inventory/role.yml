@@ -1,4 +1,4 @@
 ---
 - hosts: "{{ source_host }}"
   roles:
-    - test
+    - package

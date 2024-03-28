@@ -1,0 +1,44 @@
+---
+- name: Update cache 
+  apt:
+    update_cache: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Upgrade all packages on ubuntu servers
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - openssh-clients
+    - openssh
+    - openssh-server
+    - python
+    - python-libs
+    - amazon-ssm-agent
+    - openssl-libs #CentOS
+    - openssl 
+    - systemd #CentOS
+    - systemd-libs #CentOS
+    - systemd-sysv #CentOS
+    - mod_ssl #CentOS
+    - httpd-tools #CentOS
+    - httpd #CentOS
+    - zlib #CentOS 
+    - nss #CentOS
+    - nss-sysinit #CentOS
+    - nss-tools #CentOS
+    - libX11-common #CentOS
+    - libX11 #CentOS
+    - libwebp-devel #Linux
+    - libwebp #Linux
+    - libssh2 #Linux
+    - libpython3.6 #ubuntu
+    - python3.6 #ubuntu
+    - python2.7 #ubuntu
+    - libpython2.7 #ubuntu
+    - kernel-devel #linux
+    - kernel-headers #linux
+    - kernel #linux
+  ignore_errors: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' 
+
