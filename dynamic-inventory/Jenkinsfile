@@ -6,6 +6,8 @@ pipeline {
     agent { label 'ansible' }
     parameters {
         choice(name: 'Action', choices: 'plan\napply', description: 'Manual build stages')
+        string(name: 'hosts', defaultValue: 'aws_ec2.yml', description: 'Here we are providing host value')
+        string(name: 'source_host', defaultValue: 'source_host=ubuntu', description: 'Here we are providing source_host value')
     }
     // triggers {
     //     pollSCM('H/10 * * * *')
@@ -24,7 +26,7 @@ pipeline {
             }
             steps {
                 ansiColor('xterm') {
-                    sh 'cd dynamic-inventory; ansible-playbook -i aws_ec2.yml role.yml'
+                    sh 'cd dynamic-inventory; ansible-playbook -i $hosts -e $source_host role.yml'
                 }
             }
         }
