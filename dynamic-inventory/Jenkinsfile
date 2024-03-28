@@ -24,7 +24,7 @@ pipeline {
             }
             steps {
                 ansiColor('xterm') {
-                    sh 'cd dynamic-inventory; ansible-playbook -i aws_ec2.yml role.yml'
+                    sh 'cd dynamic-inventory; ansible-playbook -i aws_ec2.yml test.yml'
                 }
             }
         }
