@@ -1,0 +1,5 @@
+---
+- name: Test Playbook
+  debug:
+    msg: "Running test.yml on {{ ansible_host }}"
+
