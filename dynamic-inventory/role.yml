@@ -1,4 +1,4 @@
 ---
-- hosts: {{ source_host }}
+- hosts: "{{ source_host }}"
   roles:
     - test
