@@ -1,6 +1,6 @@
 ---
 - name: Test Playbook
-  hosts: test
+  hosts: "{{ source_host }}"
   tasks:
     - name: Print 
       debug:
