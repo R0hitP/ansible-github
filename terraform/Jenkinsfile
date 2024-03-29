@@ -6,6 +6,7 @@ pipeline {
     agent { label 'ansible' }
     parameters {
         choice(name: 'Action', choices: 'plan\napply', description: 'Manual build stages')
+        string(name: 'source_host', defaultValue: 'source_host=test', description: 'Here we are providing source_host value')
     }
     // triggers {
     //     pollSCM('H/10 * * * *')
@@ -54,6 +55,7 @@ pipeline {
                         ansiblePlaybook(
                             playbook: 'test.yml',
                             inventory: 'inventory.yml',
+                            extras: '-e $source_host',
                             //credentialsId: 'sample-ssh-key',
                             colorized: true)
                     }
