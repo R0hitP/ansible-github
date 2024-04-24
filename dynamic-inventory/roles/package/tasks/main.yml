@@ -1,4 +1,21 @@
 ---
+- name: Update cache on CentOS/RHEL/Amazon Linux servers
+  become: yes
+  yum:
+    name: '*'
+    state: latest
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
+
+- name: Upgrade all packages on CentOS/RHEL/Amazon Linux servers
+  become: yes
+  yum:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - postfix
+  ignore_errors: yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
+
 # - name: Update cache 
 #   become: yes
 #   apt:
@@ -43,20 +60,3 @@
 #     - kernel #linux
 #   ignore_errors: yes
 #   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' 
-
-- name: Update cache on CentOS/RHEL/Amazon Linux servers
-  become: yes
-  yum:
-    name: '*'
-    state: latest
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
-
-- name: Upgrade all packages on CentOS/RHEL/Amazon Linux servers
-  become: yes
-  yum:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - postfix
-  ignore_errors: yes
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
