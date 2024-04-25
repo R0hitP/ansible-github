@@ -19,8 +19,10 @@
 - name: Upgrade list of packages on Amazon Linux servers
   become: yes
   yum:
-    name: "{{ vulnerable_packages | join(',') }}"
+    name: "{{ item }}"
     state: latest
+  loop: "{{ vulnerable_packages }}"
+  ignore_errors: yes
   when: ansible_distribution == 'Amazon'
 
 # - name: Upgrade list of packages on Amazon Linux servers
