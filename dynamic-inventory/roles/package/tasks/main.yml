@@ -16,14 +16,14 @@
 #   become: yes
 #   shell: amazon-linux-extras enable kernel-5.15
 
-- name: Upgrade list of packages on Amazon Linux servers
-  become: yes
-  yum:
-    name: "{{ item }}"
-    state: latest
-  loop: "{{ aws_vulnerable_packages }}"
-  ignore_errors: yes
-  when: ansible_distribution == 'Amazon'
+# - name: Upgrade list of packages on Amazon Linux servers
+#   become: yes
+#   yum:
+#     name: "{{ item }}"
+#     state: latest
+#   loop: "{{ aws_vulnerable_packages }}"
+#   ignore_errors: yes
+#   when: ansible_distribution == 'Amazon'
 
 #use the list no loop 
 # - name: Upgrade list of packages on Amazon Linux servers
