@@ -17,6 +17,7 @@
     - kernel-headers
     - kernel
     - runc
+    - containerd
   ignore_errors: yes
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
 
