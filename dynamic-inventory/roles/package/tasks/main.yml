@@ -13,6 +13,10 @@
     state: latest
   loop:
     - postfix
+    - kernel-devel
+    - kernel-headers
+    - kernel
+    - runc
   ignore_errors: yes
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
 
