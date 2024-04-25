@@ -1,16 +1,16 @@
 ---
-# - name: Remove lock from specific packages
-#   become: yes
-#   community.general.yum_versionlock:
-#     state: absent
-#     name: "{{ item }}"
-#   loop:
-#     - kernel-devel
-#     - kernel-headers
-#     - kernel
-#     - runc
-#     - containerd
-#   when: ansible_distribution == 'Amazon'
+- name: Remove lock from specific packages
+  become: yes
+  community.general.yum_versionlock:
+    state: absent
+    name: "{{ item }}"
+  loop:
+    - kernel-devel
+    - kernel-headers
+    - kernel
+    - runc
+    - containerd
+  when: ansible_distribution == 'Amazon'
 
 # - name: Enable kernel version 5.15
 #   become: yes
@@ -40,5 +40,30 @@
     - glib2
     - less
     - microcode_ctl
+    - ncurses-libs #mediums
+    - ncurses
+    - ncurses-base
+    - dbus
+    - dbus-libs
+    - openssh-clients
+    - openssh
+    - openssh-server
+    - libcurl
+    - curl
+    - python-urllib3
+    - zlib
+    - zlib-devel
+    - vim-data
+    - vim-minimal
+    - python3-pip
+    - python3-libs
+    - python3
+    - openssl-libs
+    - openssl
+    - krb5-libs
+    - python-jinja2
+    - libxml2
+    - libxml2-python
+    - python-jwcrypto
   ignore_errors: yes
   when: ansible_distribution == 'Amazon'
