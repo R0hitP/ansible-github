@@ -47,4 +47,14 @@ aws_vulnerable_packages:
   - python-jwcrypto
 
 ubuntu_vulnerable_packages:
-  - pack
+  - openssh-client
+  - vim
+  - vim-tiny
+  - xxd
+  - snapd
+  - python3.6
+  - busybox-static
+  - busybox-initramfs
+  - linux-image-aws
+  - klibc-utils
+  - libklibc
