@@ -18,13 +18,14 @@
   community.general.yum_versionlock:
     state: absent
     name: "{{ item }}"
-    loop:
-      - kernel-devel
-      - kernel-headers
-      - kernel
-      - runc
-      - containerd
+  loop:
+    - kernel-devel
+    - kernel-headers
+    - kernel
+    - runc
+    - containerd
   when: ansible_distribution == 'Amazon'
+
 
 - name: Upgrade list of packages on CentOS/RHEL/Amazon Linux servers
   become: yes
