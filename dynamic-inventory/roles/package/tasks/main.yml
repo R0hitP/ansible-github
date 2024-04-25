@@ -21,58 +21,30 @@
   yum:
     name: "{{ item }}"
     state: latest
-  loop: "{{ vulnerable_packages }}"
+  loop: "{{ aws_vulnerable_packages }}"
   ignore_errors: yes
   when: ansible_distribution == 'Amazon'
 
+#use the list no loop 
 # - name: Upgrade list of packages on Amazon Linux servers
 #   become: yes
 #   yum:
-#     name: "{{ item }}"
+#     name: "{{ vulnerable_packages | join(',') }}"
 #     state: latest
-#   loop:
-#     - postfix
-#     - kernel-devel
-#     - kernel-headers
-#     - kernel
-#     - runc
-#     - containerd
-#     - python-devel
-#     - python-libs
-#     - python
-#     - sudo
-#     - cpio
-#     - nss
-#     - nss-tools
-#     - nss-sysinit
-#     - nerdctl
-#     - glib2
-#     - less
-#     - microcode_ctl
-#     - ncurses-libs #mediums
-#     - ncurses
-#     - ncurses-base
-#     - dbus
-#     - dbus-libs
-#     - openssh-clients
-#     - openssh
-#     - openssh-server
-#     - libcurl
-#     - curl
-#     - python-urllib3
-#     - zlib
-#     - zlib-devel
-#     - vim-data
-#     - vim-minimal
-#     - python3-pip
-#     - python3-libs
-#     - python3
-#     - openssl-libs
-#     - openssl
-#     - krb5-libs
-#     - python-jinja2
-#     - libxml2
-#     - libxml2-python
-#     - python-jwcrypto
 #   ignore_errors: yes
 #   when: ansible_distribution == 'Amazon'
+
+- name: Update cache 
+  become: yes
+  apt:
+    update_cache: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Upgrade list of packages on Amazon Linux servers
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ ubuntu_vulnerable_packages }}"
+  ignore_errors: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' 

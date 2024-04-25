@@ -1,7 +1,7 @@
 ---
 # vars file for test
 
-vulnerable_packages:
+aws_vulnerable_packages:
   - postfix
   - kernel-devel
   - kernel-headers
@@ -45,3 +45,6 @@ vulnerable_packages:
   - libxml2
   - libxml2-python
   - python-jwcrypto
+
+ubuntu_vulnerable_packages:
+  - pack
