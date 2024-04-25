@@ -1,12 +1,8 @@
 ---
-- name: Update cache on CentOS/RHEL/Amazon Linux servers
-  become: yes
-  yum:
-    name: '*'
-    state: latest
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
+- name: install epel-release package
+  yum: name=epel-release state=present
 
-- name: Upgrade all packages on CentOS/RHEL/Amazon Linux servers
+- name: Upgrade list of packages on CentOS/RHEL/Amazon Linux servers
   become: yes
   yum:
     name: "{{ item }}"
@@ -18,6 +14,10 @@
     - kernel
     - runc
     - containerd
+    - python-devel
+    - python-libs
+    - python
+    - sudo
   ignore_errors: yes
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_distribution == 'Amazon'
 
