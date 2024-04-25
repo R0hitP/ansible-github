@@ -40,7 +40,7 @@
     update_cache: yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-- name: Upgrade list of packages on Amazon Linux servers
+- name: Upgrade list of packages on Ubuntu servers
   become: yes
   apt:
     name: "{{ item }}"
