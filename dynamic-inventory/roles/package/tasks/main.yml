@@ -15,6 +15,7 @@
 #   yum: name=epel-release state=present
 #   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
 - name: Remove lock from specific packages
+  become: yes
   community.general.yum_versionlock:
     state: absent
     name: "{{ item }}"
