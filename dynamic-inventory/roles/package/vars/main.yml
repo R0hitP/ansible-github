@@ -5,7 +5,7 @@ vulnerable_packages:
   - postfix
   - kernel-devel
   - kernel-headers
-  - kernelå
+  - kernel
   - runc
   - containerd
   - python-devel
