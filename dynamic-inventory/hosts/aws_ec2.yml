@@ -20,3 +20,6 @@ hostnames:
 
 groups: 
   ubuntu: "'test' in tags.condition"
+
+compose:
+  ansible_user: ssm-user 
