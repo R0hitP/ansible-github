@@ -27,6 +27,9 @@
     - containerd
   when: ansible_distribution == 'Amazon'
 
+- name: Enable kernel version 5.15
+  become: yes
+  shell: amazon-linux-extras enable kernel-5.15
 
 - name: Upgrade list of packages on CentOS/RHEL/Amazon Linux servers
   become: yes
