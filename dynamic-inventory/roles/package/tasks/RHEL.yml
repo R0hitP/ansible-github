@@ -1,0 +1,16 @@
+# ---
+# - name: Ensure EPEL repository is enabled
+#   become: yes
+#   yum_repository:
+#     name: epel
+#     description: Extra Packages for Enterprise Linux (EPEL)
+#     file: epel.repo
+#     baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+#     gpgcheck: yes
+#     gpgkey: https://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-$releasever
+#     enabled: yes
+#   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+# - name: install epel-release package
+#   yum: name=epel-release state=present
+#   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
