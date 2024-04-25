@@ -43,8 +43,15 @@
 - name: Upgrade list of packages on Ubuntu servers
   become: yes
   apt:
-    name: "{{ item }}"
+    name: "*"
     state: latest
-  loop: "{{ ubuntu_vulnerable_packages }}"
-  ignore_errors: yes
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' 
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+# - name: Upgrade list of packages on Ubuntu servers
+#   become: yes
+#   apt:
+#     name: "{{ item }}"
+#     state: latest
+#   loop: "{{ ubuntu_vulnerable_packages }}"
+#   ignore_errors: yes
+#   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' 
