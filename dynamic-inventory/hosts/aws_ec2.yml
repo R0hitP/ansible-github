@@ -19,4 +19,4 @@ hostnames:
 #   - key: placement.availability_zone
 
 groups: 
-  ubuntu: "'test' in tags.condition"
+  servers: "'test' in tags.condition"
