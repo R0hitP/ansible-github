@@ -58,3 +58,6 @@ ubuntu_vulnerable_packages:
   - linux-image-aws
   - klibc-utils
   - libklibc
+
+ec2_instance_connect_packages:
+  - ec2-instance-connect
