@@ -20,3 +20,4 @@ hostnames:
 
 groups: 
   servers: "'test' in tags.condition"
+  ubuntu: "'ubuntu' in tags.OS"
