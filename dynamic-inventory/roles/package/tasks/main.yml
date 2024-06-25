@@ -1,12 +1,12 @@
 ---
-- name: Upgrade or manage packages on Amazon Linux servers
+- name: Upgrade list of packages on Amazon Linux servers
   become: yes
   yum:
-    name: "{{ item.key }}"
-    state: "{{ item.value }}"
-  loop: "{{ aws_vulnerable_packages_dict | dict2items }}"
+    name: "{{ item }}"
+    state: installed
+  loop: "{{ aws_vulnerable_packages2 }}"
   ignore_errors: yes
-  when: ansible_distribution == 'Amazon'   
+  when: ansible_distribution == 'Amazon'
 
 # - name: Remove lock from specific packages
 #   become: yes
