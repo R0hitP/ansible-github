@@ -1,4 +1,13 @@
 ---
+- name: Upgrade or manage packages on Amazon Linux servers
+  become: yes
+  yum:
+    name: "{{ item.key }}"
+    state: "{{ item.value }}"
+  loop: "{{ aws_vulnerable_packages_dict | dict2items }}"
+  ignore_errors: yes
+  when: ansible_distribution == 'Amazon'   
+
 # - name: Remove lock from specific packages
 #   become: yes
 #   community.general.yum_versionlock:
@@ -64,13 +73,4 @@
   loop: "{{ ec2_instance_connect_packages }}"
   ignore_errors: yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-- name: Upgrade or manage packages on Amazon Linux servers
-    become: yes
-    yum:
-      name: "{{ item.key }}"
-      state: "{{ item.value }}"
-    loop: "{{ aws_vulnerable_packages_dict | dict2items }}"
-    ignore_errors: yes
-    when: ansible_distribution == 'Amazon'   
 
