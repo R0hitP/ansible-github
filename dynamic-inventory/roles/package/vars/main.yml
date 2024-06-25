@@ -61,3 +61,7 @@ ubuntu_vulnerable_packages:
 
 ec2_instance_connect_packages:
   - ec2-instance-connect
+
+aws_vulnerable_packages_dict:
+  python3-libs: 0:3.7.16-1.amzn2.0.6
+  python3: 0:3.7.16-1.amzn2.0.6
