@@ -1,4 +1,8 @@
 ---
+#ansible to grab inspector finding report then use csv to create host file
+
+#filter columns to resource id, serverity, fixed and current version, public and private ips
+#eic endpoint to send out ssh keys for ansible fallback is sending and copying public ssh key to target nodes
 - name: Upgrade list of packages on Amazon Linux servers
   become: yes
   yum:
