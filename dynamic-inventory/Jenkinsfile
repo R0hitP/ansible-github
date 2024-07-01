@@ -15,11 +15,19 @@ pipeline {
                 checkout scm
             }
         }
-        // stage('Establish ssh connection') {
-        //     steps {
-        //         sh "aws ec2-instance-connect send-ssh-public-key --instance-id i-0f3a063e6952700ad --instance-os-user ssm-user --ssh-public-key file://~/.ssh/id_rsa.pub --profile trainee"
-        //     }
-        // }
+        // check looping method of ec2 instance connect send-ssh-public key
+        stage('Establish ssh connection') {
+            steps {
+                sh "aws ec2-instance-connect send-ssh-public-key --instance-id i-0f3a063e6952700ad --instance-os-user ssm-user --ssh-public-key file://~/.ssh/id_rsa.pub --profile trainee"
+            }
+        }
+        // check if this open tunnel command works and if not see if we can do a one by one instance ssh connection and run playbook
+        stage ('keep ssh connection open') {
+            steps {
+                sh "ssh -i ~/.ssh/id_rsa.pub ssm-user@i-07f11689b9c092089 -o ProxyCommand='aws ec2-instance-connect open-tunnel --instance-id i-07f11689b9c092089 --max-tunnel-duration 100'"
+            }
+        }
+        //aws ec2-instance-connect ssh --instance-id i-07f11689b9c092089 --connection-type eice --private-key-file ec2key
         stage('Run ansible playbook') {
             when {
                 expression {
