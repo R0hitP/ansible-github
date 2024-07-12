@@ -25,7 +25,7 @@ pipeline {
         stage ('keep ssh connection open') {
             steps {
                 //sh "ssh -i ~/.ssh/id_rsa ssm-user@10.0.136.242 -o ProxyCommand='aws ec2-instance-connect open-tunnel --instance-id i-0f3a063e6952700ad --max-tunnel-duration 100 --profile trainee'"
-                sh "aws ec2-instance-connect open-tunnel --instance-id i-0f3a063e6952700ad --max-tunnel-duration 100 --profile trainee"
+                sh "aws ec2-instance-connect open-tunnel --instance-id i-0f3a063e6952700ad --max-tunnel-duration 100 --local-port 5555 --profile trainee"
             }
         }
         //aws ec2-instance-connect ssh --instance-id i-07f11689b9c092089 --connection-type eice --private-key-file ec2key
