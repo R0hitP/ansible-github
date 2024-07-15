@@ -26,6 +26,13 @@ pipeline {
         //         sh "export AWS_SESSION_TOKEN=$aws_session_token"
         //     }
         // }
+        stage('Set up ansible') {
+            steps {
+                sh "cd scripts; python3 ansible_package.py"
+                sh "mv ansible-vars.yml ../roles/package/vars/"
+                sh "ls"
+            }
+        }
         stage('Establish ssh connection') {
             steps {
                 sh "aws ec2-instance-connect send-ssh-public-key --instance-id i-0f3a063e6952700ad --instance-os-user ssm-user --ssh-public-key file://~/.ssh/id_rsa.pub --profile trainee"
