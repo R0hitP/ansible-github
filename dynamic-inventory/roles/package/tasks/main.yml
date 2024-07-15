@@ -3,7 +3,6 @@
   become: yes
   yum:
     name: "{{ item }}"
-    state: latest
+    state: installed
   loop: "{{ affected_packages }}"
   ignore_errors: yes
-  # when: ansible_distribution == 'Amazon'
