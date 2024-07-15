@@ -9,9 +9,9 @@ pipeline {
         string(name: 'hosts', defaultValue: 'hosts/aws_ec2.yml', description: 'Here we are providing host value')
         string(name: 'source_host', defaultValue: 'source_host=servers', description: 'Here we are providing source_host value')
         //AWS
-        string(name: 'aws_access_key_id', defaultValue: '', description: 'aws access key id')
-        string(name: 'aws_secret_key_id', defaultValue: '', description: 'aws secret key id')
-        string(name: 'aws_session_token', defaultValue: '', description: 'aws session token')
+        // string(name: 'aws_access_key_id', defaultValue: '', description: 'aws access key id')
+        // string(name: 'aws_secret_key_id', defaultValue: '', description: 'aws secret key id')
+        // string(name: 'aws_session_token', defaultValue: '', description: 'aws session token')
     }
     stages {
         stage('Checkout') {
@@ -19,13 +19,13 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Set up aws credentials') {
-            steps {
-                sh "export AWS_ACCESS_KEY_ID=$aws_access_key_id"
-                sh "export AWS_SECRET_ACCESS_KEY=$aws_secret_key_id"
-                sh "export AWS_SESSION_TOKEN=$aws_session_token"
-            }
-        }
+        // stage('Set up aws credentials') {
+        //     steps {
+        //         sh "export AWS_ACCESS_KEY_ID=$aws_access_key_id"
+        //         sh "export AWS_SECRET_ACCESS_KEY=$aws_secret_key_id"
+        //         sh "export AWS_SESSION_TOKEN=$aws_session_token"
+        //     }
+        // }
         stage('Establish ssh connection') {
             steps {
                 sh "aws ec2-instance-connect send-ssh-public-key --instance-id i-0f3a063e6952700ad --instance-os-user ssm-user --ssh-public-key file://~/.ssh/id_rsa.pub"
