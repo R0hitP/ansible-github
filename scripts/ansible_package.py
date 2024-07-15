@@ -30,12 +30,13 @@ for index, row in df.iterrows():
 # Remove duplicates
 affected_packages_list = list(set(affected_packages_list))
 
-# Convert the list to a YAML format
+# Convert the list to a YAML format with '---' at the top
 ansible_yaml = yaml.dump({'affected_packages': affected_packages_list}, default_flow_style=False)
+ansible_yaml = f"---\n{ansible_yaml}"
 
 # Path to the Ansible variable file
 current_dir = os.getcwd()
-ansible_var_file = os.path.join(current_dir, 'main.yml')
+ansible_var_file = os.path.join(current_dir, 'ansible-vars.yml')
 
 # Write the YAML to a file
 with open(ansible_var_file, 'w') as file:
