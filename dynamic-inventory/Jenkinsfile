@@ -29,7 +29,7 @@ pipeline {
         stage('Set up ansible') {
             steps {
                 sh "cd scripts; python3 ansible_package.py"
-                sh "mv ansible-vars.yml ../roles/package/vars/"
+                sh "mv ansible-vars.yml dynamic-inventory/roles/package/vars/"
                 sh "ls"
             }
         }
