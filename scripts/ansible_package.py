@@ -35,7 +35,7 @@ ansible_yaml = yaml.dump({'affected_packages': affected_packages_list}, default_
 
 # Path to the Ansible variable file
 current_dir = os.getcwd()
-ansible_var_file = os.path.join(current_dir, 'ansible-vars.yml')
+ansible_var_file = os.path.join(current_dir, 'main.yml')
 
 # Write the YAML to a file
 with open(ansible_var_file, 'w') as file:
