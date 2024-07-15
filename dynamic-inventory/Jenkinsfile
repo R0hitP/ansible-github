@@ -8,6 +8,10 @@ pipeline {
         choice(name: 'Action', choices: 'plan\napply', description: 'Manual build stages')
         string(name: 'hosts', defaultValue: 'hosts/aws_ec2.yml', description: 'Here we are providing host value')
         string(name: 'source_host', defaultValue: 'source_host=servers', description: 'Here we are providing source_host value')
+        //AWS
+        string(name: 'aws_access_key_id', defaultValue: '', description: 'aws access key id')
+        string(name: 'aws_secret_key_id', defaultValue: '', description: 'aws secret key id')
+        string(name: 'aws_session_token', defaultValue: '', description: 'aws session token')
     }
     stages {
         stage('Checkout') {
@@ -15,20 +19,18 @@ pipeline {
                 checkout scm
             }
         }
-        // check looping method of ec2 instance connect send-ssh-public key
+        stage('Set up aws credentials') {
+            steps {
+                sh "export AWS_ACCESS_KEY_ID=$aws_access_key_id"
+                sh "export AWS_SECRET_ACCESS_KEY=$aws_secret_key_id"
+                sh "export AWS_SESSION_TOKEN=$aws_session_token"
+            }
+        }
         stage('Establish ssh connection') {
             steps {
-                sh "aws ec2-instance-connect send-ssh-public-key --instance-id i-0f3a063e6952700ad --instance-os-user ssm-user --ssh-public-key file://~/.ssh/id_rsa.pub --profile trainee"
+                sh "aws ec2-instance-connect send-ssh-public-key --instance-id i-0f3a063e6952700ad --instance-os-user ssm-user --ssh-public-key file://~/.ssh/id_rsa.pub"
             }
         }
-        // check if this open tunnel command works and if not see if we can do a one by one instance ssh connection and run playbook
-        stage ('keep ssh connection open') {
-            steps {
-                //sh "ssh -i ~/.ssh/id_rsa ssm-user@10.0.136.242 -o ProxyCommand='aws ec2-instance-connect open-tunnel --instance-id i-0f3a063e6952700ad --max-tunnel-duration 100 --profile trainee'"
-                sh "aws ec2-instance-connect open-tunnel --instance-id i-0f3a063e6952700ad --max-tunnel-duration 100 --local-port 5555 --profile trainee"
-            }
-        }
-        //aws ec2-instance-connect ssh --instance-id i-07f11689b9c092089 --connection-type eice --private-key-file ec2key
         stage('Run ansible playbook') {
             when {
                 expression {
