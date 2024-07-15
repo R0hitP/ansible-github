@@ -31,7 +31,7 @@ pipeline {
                 //need to install module panda to use python script
                 //sudo apt install python3-pip & pip3 install pandas
                 sh "cd scripts; python3 ansible_package.py"
-                sh "cd scripts; mv ansible-vars.yml ../dynamic-inventory/roles/package/vars"
+                sh "cd scripts; mv ansible-vars.yml ../dynamic-inventory/roles/package/vars/main.yml"
             }
         }
         stage('Establish ssh connection') {
