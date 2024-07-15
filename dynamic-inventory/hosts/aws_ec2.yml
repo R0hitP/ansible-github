@@ -22,3 +22,4 @@ groups:
   servers: "'test' in tags.condition"
   ubuntu: "'ubuntu' in tags.OS"
   eic: "'eic' in tags.target"
+  demo: "'demo' in tags.target"
