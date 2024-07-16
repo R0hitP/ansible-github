@@ -43,8 +43,3 @@ with open(ansible_var_file, 'w') as file:
     file.write(ansible_yaml)
 
 print(f"Ansible variable file created at {ansible_var_file}")
-
-# Clean up local files if needed
-if os.path.exists(filtered_download_path):
-    os.remove(filtered_download_path)
-    print(f"Deleted temporary filtered CSV file {filtered_download_path}")
