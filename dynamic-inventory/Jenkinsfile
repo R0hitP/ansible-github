@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Establish ssh connection') {
             steps {
-                sh "aws ec2-instance-connect send-ssh-public-key --instance-id i-0f3a063e6952700ad --instance-os-user ssm-user --ssh-public-key file://~/.ssh/id_rsa.pub --profile trainee"
+                sh "cd script; sh eic_ssh_connection.sh"
             }
         }
         stage('Run ansible playbook') {
