@@ -55,6 +55,7 @@ pipeline {
     }
     post {
         always {
+            sh "rm /tmp/filtered-findings-report.csv"
             echo "Clean up the workspace in deploy node!"
             cleanWs()
         }
