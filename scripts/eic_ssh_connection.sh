@@ -17,7 +17,7 @@ fi
 # Specify region and instance OS user
 region="us-east-1"
 instance_os_user="ssm-user"
-profile="UserR"
+profile="trainee"
 
 # Extract instance IDs (using awk with uniq)
 instance_ids=$(awk -F',' '{if (NR>1) print $1}' "$csv_file" | sort | uniq)
