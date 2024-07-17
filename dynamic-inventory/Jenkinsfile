@@ -48,7 +48,7 @@ pipeline {
             }
             steps {
                 ansiColor('xterm') {
-                    sh 'cd dynamic-inventory; ansible-playbook -i $hosts -e $source_host --user ssm-user role.yml'
+                    sh 'cd dynamic-inventory; ansible-playbook -i $hosts -e $source_host --user ssm-user --check role.yml'
                 }
             }
         }
