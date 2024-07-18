@@ -8,11 +8,11 @@
   ignore_errors: yes
   when: ansible_distribution == 'Amazon'
 
-- name: Update cache 
-  become: yes
-  apt:
-    update_cache: yes
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+# - name: Update cache 
+#   become: yes
+#   apt:
+#     update_cache: yes
+#   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 
 - name: Upgrade list of packages on Ubuntu servers
