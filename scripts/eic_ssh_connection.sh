@@ -30,6 +30,8 @@ aws ec2-instance-connect send-ssh-public-key \
     --region "$region" \
     --instance-os-user "$instance_os_user" \
     --ssh-public-key "file://$ssh_key_file" \
+    --cli-read-timeout 180 \
+    --cli-connect-timeout 180 \
     --profile "$profile" || {
     echo "Error adding SSH key to instance '$instance_id'"
     # Continue processing remaining instances
