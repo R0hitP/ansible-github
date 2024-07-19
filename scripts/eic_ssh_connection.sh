@@ -21,7 +21,7 @@ profile="trainee"
 
 # Extract instance IDs (using awk with uniq)
 #instance_ids=$(awk -F',' '{if (NR>1) print $1}' "$csv_file" | sort | uniq)
-instance_ids=("i-0859a84eb73b20837","i-0be43c25e9f52f8ba","i-0b754f46118f2127a")
+instance_ids= ("i-0859a84eb73b20837","i-0be43c25e9f52f8ba","i-0b754f46118f2127a")
 for instance_id in $instance_ids; do
 # Execute AWS CLI command with error handling 
 echo "applying chnages for instance '$instance_id'"
