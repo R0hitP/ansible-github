@@ -4,12 +4,12 @@ csv_file="/tmp/filtered-findings-report.csv"
 ssh_key_file="~/.ssh/id_rsa.pub"
 
 # Validate file existence
-if [ ! -f "$csv_file" ]; then
+if [[ ! -f "$csv_file" ]]; then
 echo "Error: CSV file '$csv_file' not found!"
 exit 1
 fi
 
-if [ ! -f "$ssh_key_file" ]; then
+if [[ ! -f "$ssh_key_file" ]]; then
 echo "Error: SSH public key file '$ssh_key_file' not found!"
 exit 1
 fi
