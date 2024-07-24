@@ -49,7 +49,7 @@ pipeline {
             steps {
                 ansiColor('xterm') {
               //   sh 'cd dynamic-inventory; ansible-playbook -i $hosts -e $source_host --user ssm-user --check --ssh-common-args=\'-o StrictHostKeyChecking=no\' role.yml'
-                 sh 'cd dynamic-inventory; ansible-playbook  -i $hosts -e $source_host -c aws_ssm -e "aws_region=us-east-1" --check --ssh-common-args=\'-o StrictHostKeyChecking=no\' role.yml --skip-tags=gather_facts'
+                 sh 'cd dynamic-inventory; ansible-playbook -vvv -i $hosts -e $source_host -c aws_ssm -e "aws_region=us-east-1" --check --ssh-common-args=\'-o StrictHostKeyChecking=no\' role.yml '
 
                 }
             }
